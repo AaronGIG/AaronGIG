@@ -1,1 +1,12 @@
-
+global env_var hvar466 hvar464 hvar23 hvar467 hvar22 hvar17 hvar13  //填写需要调用的对应变量字符串(此处是字符串 不加引号！！！)
+*变量分别保留文件
+local i = 1
+foreach v in $env_var{
+preserve
+capture keep if var == "`v'" //这样批量调用字符串！nice！
+rename (hvar) (`v')
+drop var
+save "~/`v'.dta", replace
+restore
+local i = `i' + 1
+}
